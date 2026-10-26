@@ -1,0 +1,63 @@
+{
+  "title": {
+    "en": "Mega Plugin Index",
+    "zh": "超级插件聚合源"
+  },
+  "description": {
+    "en": "Community plugin index aggregated from multiple public DeepSeek Harness plugin indexes, refreshed daily.",
+    "zh": "由多个公开 DeepSeek Harness 插件索引合并去重而成的社区插件源，每日自动更新。"
+  },
+  "curateMetadata": true,
+  "categoryAliases": {
+    "ui": "interface",
+    "theme": "appearance",
+    "dev": "development",
+    "engineering": "development",
+    "skill": "skills",
+    "model": "providers",
+    "agi": "knowledge",
+    "design": "appearance",
+    "from-grok-bot-team": "workflow",
+    "marketing": "workflow",
+    "sales": "workflow",
+    "product": "workflow",
+    "session": "tools",
+    "remote": "tools",
+    "notify": "tools",
+    "security": "tools",
+    "git": "tools",
+    "browser": "tools",
+    "docs": "tools",
+    "market": "tools",
+    "voice": "tools",
+    "vision": "tools",
+    "identity": "tools",
+    "fun": "tools",
+    "personal": "tools",
+    "wsl": "tools",
+    "other": "tools",
+    "operations": "tools"
+  },
+  "sources": [
+    {
+      "id": "dshopen",
+      "url": "https://dshopen.org/index.json",
+      "enabled": true
+    },
+    {
+      "id": "npm-catalog",
+      "url": "https://cdn.jsdelivr.net/npm/dsh-plugin-catalog/index.json",
+      "enabled": true
+    },
+    {
+      "id": "plugin-health",
+      "url": "https://easonmws.github.io/dsh-plugin-health/index.json",
+      "enabled": true
+    },
+    {
+      "id": "grok-bots",
+      "url": "https://brokep.github.io/grok-bots-for-deepseek-harness/index.json",
+      "enabled": true
+    }
+  ]
+}

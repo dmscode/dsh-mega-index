@@ -1,0 +1,70 @@
+name: Aggregate plugin indexes
+
+on:
+  schedule:
+    # 每天 03:17 UTC（北京时间 11:17）。错开整点，避开 GitHub 定时任务的高峰拥堵
+    - cron: '17 3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: aggregate
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Merge sources
+        id: merge
+        run: node scripts/merge.mjs
+
+      - name: Commit refreshed index
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.json stats.json
+          if git diff --cached --quiet; then
+            echo "index unchanged, skip commit"
+          else
+            git commit -m "chore: refresh aggregated index"
+            git push
+          fi
+
+      - name: Publish summary
+        run: |
+          node -e '
+            const s = require("./stats.json");
+            const lines = s.sources.map(x => `- ${x.ok ? "ok" : "FAIL"} \`${x.id}\`: ${x.ok ? x.plugins + " plugins" : x.error}`);
+            const body = [`Aggregated **${s.plugins}** plugins / ${s.versions} versions (${(s.bytes / 1048576).toFixed(2)} MiB) at ${s.generatedAt}`, "", ...lines].join("\n");
+            require("fs").appendFileSync(process.env.GITHUB_STEP_SUMMARY, body + "\n");
+          '
+
+      - name: Stage site
+        run: |
+          mkdir -p public
+          cp index.json stats.json public/
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
