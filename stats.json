@@ -1,36 +1,36 @@
 {
-  "generatedAt": "2026-11-23T12:28:18.548Z",
+  "generatedAt": "2026-11-24T13:37:51.596Z",
   "sources": [
     {
       "id": "dshopen",
       "url": "https://dshopen.org/index.json",
       "ok": true,
-      "plugins": 1465,
-      "ms": 2020
+      "plugins": 1481,
+      "ms": 1515
     },
     {
       "id": "npm-catalog",
       "url": "https://cdn.jsdelivr.net/npm/dsh-plugin-catalog/index.json",
       "ok": true,
       "plugins": 6717,
-      "ms": 173
+      "ms": 161
     },
     {
       "id": "plugin-health",
       "url": "https://easonmws.github.io/dsh-plugin-health/index.json",
       "ok": true,
       "plugins": 300,
-      "ms": 176
+      "ms": 171
     },
     {
       "id": "grok-bots",
       "url": "https://brokep.github.io/grok-bots-for-deepseek-harness/index.json",
       "ok": true,
       "plugins": 90,
-      "ms": 1011
+      "ms": 125
     }
   ],
-  "plugins": 7360,
-  "versions": 8004,
-  "bytes": 9264087
+  "plugins": 7373,
+  "versions": 8153,
+  "bytes": 9328163
 }
